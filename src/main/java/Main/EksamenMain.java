@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import utils.EMF_Creator;
 import entities.User;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -29,8 +30,21 @@ public class EksamenMain {
      */
     public static void main(String[] args) {
         //Persistence.generateSchema("pu", null);
-        User u1 = User("Freja", "gylving");
-        User u2 = User("Frej", "Gyngre");
+        EntityManager em = EMF.createEntityManager();
+        
+        User u1 = new User("Freja", "gylving");
+        User u2 = new User("Frej", "Gyngre");
+        User u3 = new User("Frig", "gungre");
+        
+         try {
+            em.getTransaction().begin();
+            em.persist(u1);
+            em.persist(u2);
+            em.persist(u3);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
     
 }
