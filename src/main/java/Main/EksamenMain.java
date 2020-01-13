@@ -8,6 +8,7 @@ package Main;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import utils.EMF_Creator;
+import entities.User;
 
 /**
  *
@@ -27,7 +28,9 @@ public class EksamenMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Persistence.generateSchema("pu", null);
+        //Persistence.generateSchema("pu", null);
+        User u1 = User("Freja", "gylving");
+        User u2 = User("Frej", "Gyngre");
     }
     
 }

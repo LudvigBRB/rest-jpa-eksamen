@@ -5,6 +5,10 @@
  */
 package facades;
 
+import entities.User;
+import entities.MenuPlan;
+import errors.NotFoundException;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 /**
@@ -25,6 +29,27 @@ public class UserFacade {
             instance = new UserFacade();
         }
         return instance;
+    }
+
+    public User userGetMenuPlan(String username, long id) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        User user;
+        MenuPlan menuPlan;
+
+        try {
+            em.getTransaction().begin();
+            user = em.find(User.class, username);
+            menuPlan = em.find(MenuPlan.class, id);
+            user.addMenuPlan(menuPlan);
+            em.merge(user);
+            em.getTransaction().commit();
+            if (user == null || menuPlan == null) {
+                throw new NotFoundException("User or menuplan not found");
+            }
+            return user;
+        } finally {
+            em.close();
+        }
     }
 
 }

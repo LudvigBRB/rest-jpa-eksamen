@@ -33,14 +33,7 @@ public class User implements Serializable {
 
     public User() {
     }
-
-    public User(int id, String userName, String password, List<MenuPlan> menuPlans) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.menuPlans = menuPlans;
-    }
-
+    
     public void setMenuPlans(List<MenuPlan> menuPlans) {
         this.menuPlans = menuPlans;
     }
