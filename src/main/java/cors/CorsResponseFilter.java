@@ -8,7 +8,6 @@ import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.container.PreMatching;
 import javax.ws.rs.ext.Provider;
 
-//Comment out the two annotations below to disable CORS-handling
 @Provider
 @PreMatching
 public class CorsResponseFilter implements ContainerResponseFilter {
