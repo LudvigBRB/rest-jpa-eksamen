@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,34 +22,49 @@ public class MenuPlan implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private int id;
+    private List<String> shoppingList;
+    private List<DayPlan> weekPlan;
 
-    public Long getId() {
+    public MenuPlan() {
+    }
+
+    public MenuPlan(int id, List<String> shoppingList, List<DayPlan> weekPlan) {
+        this.id = id;
+        this.shoppingList = shoppingList;
+        this.weekPlan = weekPlan;
+    }
+
+    public void setShoppingList(List<String> shoppingList) {
+        this.shoppingList = shoppingList;
+    }
+    
+    public void addToBuy(String thing) {
+        shoppingList.add(thing);
+    }
+
+    public List<String> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setWeekPlan(List<DayPlan> weekPlan) {
+        this.weekPlan = weekPlan;
+    }
+    
+    public void addDayPlan(DayPlan dayPlan) {
+        weekPlan.add(dayPlan);
+    }
+
+    public List<DayPlan> getWeekPlan() {
+        return weekPlan;
+    }
+    
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MenuPlan)) {
-            return false;
-        }
-        MenuPlan other = (MenuPlan) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

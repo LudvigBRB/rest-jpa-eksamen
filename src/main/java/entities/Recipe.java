@@ -6,6 +6,8 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +25,53 @@ public class Recipe implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String description;
+    private List<String> ingredients = new ArrayList();
+    private String cookingTime;
+    private List<String> preparation;
+
+    public Recipe() {
+    }
+
+    public Recipe(Long id, String description, String cookingTime, List<String> preparation) {
+        this.id = id;
+        this.description = description;
+        this.cookingTime = cookingTime;
+        this.preparation = preparation;
+    }
+
+    public void setCookingTime(String cookingTime) {
+        this.cookingTime = cookingTime;
+    }
+
+    public String getCookingTime() {
+        return cookingTime;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setStepList(List<String> steps) {
+        this.preparation = steps;
+    }
+
+    public void addStep(String step) {
+        ingredients.add(step);
+    }
+
+    public void setIngredientList(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void addIngredient(String ingredient) {
+        ingredients.add(ingredient);
+    }
+
     public Long getId() {
         return id;
     }
@@ -32,28 +81,8 @@ public class Recipe implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Recipe)) {
-            return false;
-        }
-        Recipe other = (Recipe) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "entities.Recipe[ id=" + id + " ]";
     }
-    
+
 }
