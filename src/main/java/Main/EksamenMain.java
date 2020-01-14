@@ -31,7 +31,7 @@ public class EksamenMain {
             "jdbc:mysql://localhost:3307/eksamen",
             "dev",
             "ax2",
-            EMF_Creator.Strategy.CREATE); //DROP_AND_CREATE
+            EMF_Creator.Strategy.DROP_AND_CREATE); //DROP_AND_CREATE
     private static final MenuPlanFacade FACADE = MenuPlanFacade.getMenuPlanFacade(EMF);
 
     /**
@@ -45,78 +45,77 @@ public class EksamenMain {
         User u2 = new User("Frej", "Gyngre");
         User u3 = new User("Frig", "gungre");
         
-        List<String> preparations1 = Arrays.asList("wef", "qefe", "2dqw");
-        List<String> preparations2 = Arrays.asList("wwfwef", "qefeerfe", "df2dqw");
+        List<String> preparations1 = Arrays.asList("wef", "qefe", "dqw");
+        List<String> preparations2 = Arrays.asList("wwfwef", "qefeerfe", "dfdqw");
+        List<String> preparations3 = Arrays.asList("wewff", "sdfe", "sdfvcqw");
+        List<String> preparations4 = Arrays.asList("wwfwef", "qefeerfe", "oooow");
+        List<String> preparations5 = Arrays.asList("weiiif", "qefooooe", "pppdqw");
+        List<String> preparations6 = Arrays.asList("wwiiiif", "qeiiiiife", "dinvofinqw");
         
         Recipe r1 = new Recipe("ris", "10", preparations1);
-        Recipe r2 = new Recipe("ost", "100", preparations1);
-        Recipe r3 = new Recipe("is", "120", preparations1);
-        Recipe r4 = new Recipe("mel", "20", preparations2);
-        Recipe r5 = new Recipe("citron", "100", preparations2);
-        Recipe r6 = new Recipe("sukker", "12", preparations2);
-        
-        
+        Recipe r2 = new Recipe("ost", "100", preparations2);
+        Recipe r3 = new Recipe("is", "120", preparations3);
+        Recipe r4 = new Recipe("mel", "20", preparations4);
+        Recipe r5 = new Recipe("citron", "100", preparations5);
+        Recipe r6 = new Recipe("sukker", "12", preparations6);
+                
         DayPlan dp1 = new DayPlan(r1, "mandag");
         DayPlan dp2 = new DayPlan(r2, "tirsdag");
         DayPlan dp3 = new DayPlan(r3, "onsdag");
         DayPlan dp4 = new DayPlan(r4, "torsdag");
         DayPlan dp5 = new DayPlan(r5, "fredag");
-        DayPlan dp6 = new DayPlan(r6, "lrødag");
-        
-        List<DayPlan> dayplanlist1 = new ArrayList();
-        dayplanlist1.add(dp1);
-        dayplanlist1.add(dp2);
-        dayplanlist1.add(dp3);
-        dayplanlist1.add(dp4);
-        
-        List<DayPlan> dayplanlist2 = new ArrayList();
-        
-        //FACADE.createMenuPlan(dayplanlist1);
-        //FACADE.createMenuPlan(dayplanlist2);
-        //System.out.println(FACADE.getMenuPlan(10));
-        //System.out.println(FACADE.getAllMenus());
+        DayPlan dp6 = new DayPlan(r6, "lørdag");
+        DayPlan dp7 = new DayPlan(r6, "søndag");        
         
         MenuPlan mp1 = new MenuPlan();
-        mp1.setMessage("jejeej");
+        mp1.setMessage("Sund mad er godt");
         MenuPlan mp2 = new MenuPlan();
-        mp2.setMessage("jwefiefwioefw");
-        MenuPlan mpEdit = new MenuPlan();
-        mpEdit.setMessage("qwertyuiopmnhgfcv");
-        mpEdit.setId(10);
+        mp2.setMessage("Lav dejlig mad");
+        MenuPlan mp3 = new MenuPlan();
+        mp3.setMessage("Nam nam nam");
         
-        //FACADE.editMenuPlan(mpEdit);
-        FACADE.deleteMenuPlan(17);
-        
-        
-        mp1.setMessage("hello");
         mp1.addDayPlan(dp1);
         mp1.addDayPlan(dp2);
         mp1.addDayPlan(dp3);
+        mp1.addDayPlan(dp4);
         
-        mp2.setMessage("yipee");
         mp2.addDayPlan(dp4);
         mp2.addDayPlan(dp5);
         mp2.addDayPlan(dp6);
         
-//         try {
-//            em.getTransaction().begin();
-//            em.persist(u1);
-//            em.persist(u2);
-//            em.persist(u3);
-//            
-//            em.persist(dp1);
-//            em.persist(dp2);
-//            em.persist(dp3);
-//            em.persist(mp1);
-//            
-//            em.persist(dp4);
-//            em.persist(dp5);
-//            em.persist(dp6);
-//            em.persist(mp2);
-//            em.getTransaction().commit();
-//        } finally {
-//            em.close();
-//        }
+        mp3.addDayPlan(dp7);
+        
+         try {
+            em.getTransaction().begin();
+            em.persist(u1);
+            em.persist(u2);
+            em.persist(u3);
+            
+            em.persist(r1);
+            em.persist(r2);
+            em.persist(r3);
+            em.persist(r4);
+            em.persist(r5);
+            em.persist(r6);
+            
+            em.persist(dp1);
+            em.persist(dp2);
+            em.persist(dp3);
+            em.persist(dp4);
+            em.persist(mp1);
+            
+            em.persist(dp4);
+            em.persist(dp5);
+            em.persist(dp6);
+            em.persist(mp2);
+            
+            em.persist(dp7);
+            em.persist(mp3);
+            
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
     
 }
