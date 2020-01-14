@@ -1,5 +1,6 @@
 package rest;
 
+import DTO.MenuDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.DayPlan;
@@ -42,12 +43,16 @@ public class MenuPlanResource {
         return "{\"msg\":\"Menu Plan\"}";
     }
 
-    public String getAllBooks() throws NotFoundException {
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAllMenus() throws NotFoundException {
         //BooksDTO allbooks = new BooksDTO(BOOKFACADE.getAllBooks());
         //List<BookDTO> allbooks = new ArrayList<>();
-        List<MenuPlan> menuplans = FACADE.getAllBooks();
+        List<MenuDTO> menuDTOs = new ArrayList();
+        List<MenuPlan> menuplans = FACADE.getAllMenus();
         for (MenuPlan mp : menuplans) {
-            menuplans.add(new MenuPlan());
+            menuDTOs.add(new MenuDTO(mp));
         }
 
         return GSON.toJson(menuplans);

@@ -34,11 +34,11 @@ public class MenuPlanFacade {
         return emf.createEntityManager();
     }
     
-        public List<MenuPlan> getAllBooks() throws NotFoundException {
+        public List<MenuPlan> getAllMenus() throws NotFoundException {
         EntityManager em = getEntityManager();
         List<MenuPlan> allMenus = new ArrayList<MenuPlan>();
         try {
-            allMenus = em.createQuery("select mp from MENUPLAN mp", MenuPlan.class).getResultList();
+            allMenus = em.createQuery("select mp from MenuPlan mp", MenuPlan.class).getResultList();
 
             if (allMenus.size() == 0 || allMenus == null) {
                 throw new NotFoundException("No menus found");
