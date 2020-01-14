@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class User implements Serializable {
     private String password;
 
     @OneToMany
-    private List<MenuPlan> menuPlans;
+    private List<MenuPlan> menuPlans = new ArrayList();
 
     public User() {
     }

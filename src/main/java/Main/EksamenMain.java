@@ -85,6 +85,10 @@ public class EksamenMain {
         
         mp3.addDayPlan(dp7);
         
+        u1.addMenuPlan(mp1);
+        u2.addMenuPlan(mp2);
+        u3.addMenuPlan(mp3);
+        
          try {
             em.getTransaction().begin();
             em.persist(u1);
