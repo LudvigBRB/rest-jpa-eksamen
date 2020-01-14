@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class DayPlan implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     
-    @OneToOne
+    @OneToOne (cascade = CascadeType.PERSIST)
     private Recipe recipe;
     
     private String weekDay;
@@ -32,7 +33,7 @@ public class DayPlan implements Serializable {
     public DayPlan() {
     }
 
-    public DayPlan(int id, Recipe recipe, String weekDay) {
+    public DayPlan(Recipe recipe, String weekDay) {
         this.id = id;
         this.recipe = recipe;
         this.weekDay = weekDay;

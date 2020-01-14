@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,16 +32,26 @@ public class MenuPlan implements Serializable {
     private int id;
     private List<String> shoppingList;
     
+    private String message;
+    
     @OneToMany (cascade = CascadeType.PERSIST)
-    private List<DayPlan> weekPlan;
+    private List<DayPlan> weekPlan = new ArrayList();
 
     public MenuPlan() {
     }
 
-    public MenuPlan(int id, List<String> shoppingList, List<DayPlan> weekPlan) {
-        this.id = id;
+    public MenuPlan(String message, List<String> shoppingList, List<DayPlan> weekPlan) {
+        this.message = message;
         this.shoppingList = shoppingList;
         this.weekPlan = weekPlan;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public void setShoppingList(List<String> shoppingList) {

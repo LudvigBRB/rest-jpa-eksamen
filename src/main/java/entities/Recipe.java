@@ -33,7 +33,7 @@ public class Recipe implements Serializable {
     public Recipe() {
     }
 
-    public Recipe(Long id, String description, String cookingTime, List<String> preparation) {
+    public Recipe(String description, String cookingTime, List<String> preparation) {
         this.id = id;
         this.description = description;
         this.cookingTime = cookingTime;
