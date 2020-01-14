@@ -88,7 +88,7 @@ public class MenuPlan implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.MenuPlan[ id=" + id + " ]";
+        return "entities.MenuPlan[ Denne menuplans id=" + id + " ]";
     }
     
 }

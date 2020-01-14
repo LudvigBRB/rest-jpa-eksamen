@@ -12,8 +12,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import utils.EMF_Creator;
 import entities.User;
+import errors.NotFoundException;
+import facades.MenuPlanFacade;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.EntityManager;
 
 /**
@@ -27,13 +31,13 @@ public class EksamenMain {
             "jdbc:mysql://localhost:3307/eksamen",
             "dev",
             "ax2",
-            EMF_Creator.Strategy.DROP_AND_CREATE); //DROP_AND_CREATE
-    //private static final UserFacade FACADE = InformationFacade.getInformationFacade(EMF);
+            EMF_Creator.Strategy.CREATE); //DROP_AND_CREATE
+    private static final MenuPlanFacade FACADE = MenuPlanFacade.getMenuPlanFacade(EMF);
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotFoundException {
         //Persistence.generateSchema("pu", null);
         EntityManager em = EMF.createEntityManager();
         
@@ -59,8 +63,30 @@ public class EksamenMain {
         DayPlan dp5 = new DayPlan(r5, "fredag");
         DayPlan dp6 = new DayPlan(r6, "lrødag");
         
+        List<DayPlan> dayplanlist1 = new ArrayList();
+        dayplanlist1.add(dp1);
+        dayplanlist1.add(dp2);
+        dayplanlist1.add(dp3);
+        dayplanlist1.add(dp4);
+        
+        List<DayPlan> dayplanlist2 = new ArrayList();
+        
+        //FACADE.createMenuPlan(dayplanlist1);
+        //FACADE.createMenuPlan(dayplanlist2);
+        //System.out.println(FACADE.getMenuPlan(10));
+        //System.out.println(FACADE.getAllMenus());
+        
         MenuPlan mp1 = new MenuPlan();
+        mp1.setMessage("jejeej");
         MenuPlan mp2 = new MenuPlan();
+        mp2.setMessage("jwefiefwioefw");
+        MenuPlan mpEdit = new MenuPlan();
+        mpEdit.setMessage("qwertyuiopmnhgfcv");
+        mpEdit.setId(10);
+        
+        //FACADE.editMenuPlan(mpEdit);
+        FACADE.deleteMenuPlan(17);
+        
         
         mp1.setMessage("hello");
         mp1.addDayPlan(dp1);
@@ -72,25 +98,25 @@ public class EksamenMain {
         mp2.addDayPlan(dp5);
         mp2.addDayPlan(dp6);
         
-         try {
-            em.getTransaction().begin();
-            em.persist(u1);
-            em.persist(u2);
-            em.persist(u3);
-            
-            em.persist(dp1);
-            em.persist(dp2);
-            em.persist(dp3);
-            em.persist(mp1);
-            
-            em.persist(dp4);
-            em.persist(dp5);
-            em.persist(dp6);
-            em.persist(mp2);
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
+//         try {
+//            em.getTransaction().begin();
+//            em.persist(u1);
+//            em.persist(u2);
+//            em.persist(u3);
+//            
+//            em.persist(dp1);
+//            em.persist(dp2);
+//            em.persist(dp3);
+//            em.persist(mp1);
+//            
+//            em.persist(dp4);
+//            em.persist(dp5);
+//            em.persist(dp6);
+//            em.persist(mp2);
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
     }
     
 }
