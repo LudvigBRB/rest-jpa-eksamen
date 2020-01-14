@@ -2,7 +2,7 @@ package errors;
 
 /**
  *
- * @author lam@cphbusiness.dk
+ * @author Ludvig
  */
 public class NotFoundException extends Exception{
 
