@@ -6,10 +6,12 @@ import entities.DayPlan;
 import entities.MenuPlan;
 import entities.User;
 import errors.MissingInputException;
+import errors.NotFoundException;
 //import entities.RenameMe;
 import utils.EMF_Creator;
 import facades.DayPlanFacade;
 import facades.MenuPlanFacade;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
@@ -40,13 +42,24 @@ public class MenuPlanResource {
         return "{\"msg\":\"Menu Plan\"}";
     }
 
+    public String getAllBooks() throws NotFoundException {
+        //BooksDTO allbooks = new BooksDTO(BOOKFACADE.getAllBooks());
+        //List<BookDTO> allbooks = new ArrayList<>();
+        List<MenuPlan> menuplans = FACADE.getAllBooks();
+        for (MenuPlan mp : menuplans) {
+            menuplans.add(new MenuPlan());
+        }
+
+        return GSON.toJson(menuplans);
+    }
+
     @Path("make")
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
     public String makeMenuPlan(String dayplans) throws MissingInputException {
         List<DayPlan> dayplanning = (List<DayPlan>) GSON.fromJson(dayplans, Object.class);
-        MenuPlan  mp = FACADE.createMenuPlan(dayplanning);
+        MenuPlan mp = FACADE.createMenuPlan(dayplanning);
 
         return GSON.toJson(mp);
     }

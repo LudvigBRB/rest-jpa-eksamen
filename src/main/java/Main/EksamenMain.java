@@ -41,32 +41,52 @@ public class EksamenMain {
         User u2 = new User("Frej", "Gyngre");
         User u3 = new User("Frig", "gungre");
         
-        List<String> preparations = Arrays.asList("wef", "qefe", "2dqw");
+        List<String> preparations1 = Arrays.asList("wef", "qefe", "2dqw");
+        List<String> preparations2 = Arrays.asList("wwfwef", "qefeerfe", "df2dqw");
         
-        Recipe r1 = new Recipe("ris", "10", preparations);
-        Recipe r2 = new Recipe("ost", "100", preparations);
-        Recipe r3 = new Recipe("is", "120", preparations);
+        Recipe r1 = new Recipe("ris", "10", preparations1);
+        Recipe r2 = new Recipe("ost", "100", preparations1);
+        Recipe r3 = new Recipe("is", "120", preparations1);
+        Recipe r4 = new Recipe("mel", "20", preparations2);
+        Recipe r5 = new Recipe("citron", "100", preparations2);
+        Recipe r6 = new Recipe("sukker", "12", preparations2);
+        
         
         DayPlan dp1 = new DayPlan(r1, "mandag");
         DayPlan dp2 = new DayPlan(r2, "tirsdag");
         DayPlan dp3 = new DayPlan(r3, "onsdag");
+        DayPlan dp4 = new DayPlan(r4, "torsdag");
+        DayPlan dp5 = new DayPlan(r5, "fredag");
+        DayPlan dp6 = new DayPlan(r6, "lrødag");
         
-        MenuPlan mp = new MenuPlan();
+        MenuPlan mp1 = new MenuPlan();
+        MenuPlan mp2 = new MenuPlan();
         
-        mp.setMessage("hello");
-        mp.addDayPlan(dp1);
-        mp.addDayPlan(dp2);
-        mp.addDayPlan(dp3);
+        mp1.setMessage("hello");
+        mp1.addDayPlan(dp1);
+        mp1.addDayPlan(dp2);
+        mp1.addDayPlan(dp3);
+        
+        mp2.setMessage("yipee");
+        mp2.addDayPlan(dp4);
+        mp2.addDayPlan(dp5);
+        mp2.addDayPlan(dp6);
         
          try {
             em.getTransaction().begin();
             em.persist(u1);
             em.persist(u2);
             em.persist(u3);
+            
             em.persist(dp1);
             em.persist(dp2);
             em.persist(dp3);
-            em.persist(mp);
+            em.persist(mp1);
+            
+            em.persist(dp4);
+            em.persist(dp5);
+            em.persist(dp6);
+            em.persist(mp2);
             em.getTransaction().commit();
         } finally {
             em.close();

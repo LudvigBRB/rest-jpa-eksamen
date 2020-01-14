@@ -7,6 +7,8 @@ package facades;
 
 import entities.DayPlan;
 import entities.MenuPlan;
+import errors.NotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -30,6 +32,21 @@ public class MenuPlanFacade {
 
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
+    }
+    
+        public List<MenuPlan> getAllBooks() throws NotFoundException {
+        EntityManager em = getEntityManager();
+        List<MenuPlan> allMenus = new ArrayList<MenuPlan>();
+        try {
+            allMenus = em.createQuery("select mp from MENUPLAN mp", MenuPlan.class).getResultList();
+
+            if (allMenus.size() == 0 || allMenus == null) {
+                throw new NotFoundException("No menus found");
+            }
+        } finally {
+            em.close();
+        }
+        return allMenus;
     }
     
     public MenuPlan createMenuPlan(List<DayPlan> dayplans){
