@@ -7,17 +7,22 @@ package entities;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Ludvig
  */
 @Entity
+//@Table(name = "menu")
+@NamedQuery(name = "MenuPlan.deleteAllRows", query = "DELETE from MenuPlan")
 public class MenuPlan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -26,7 +31,7 @@ public class MenuPlan implements Serializable {
     private int id;
     private List<String> shoppingList;
     
-    @OneToMany
+    @OneToMany (cascade = CascadeType.PERSIST)
     private List<DayPlan> weekPlan;
 
     public MenuPlan() {
